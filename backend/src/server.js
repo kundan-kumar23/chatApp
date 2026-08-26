@@ -10,9 +10,11 @@ dotenv.config()
 const port = process.env.PORT || 3000;
 
 app.use(express.json())
+app.use(cookieParser())
 
 app.use("/api/auth",authRoutes)
 app.use("/api/message",messageRoutes)
+
 
 app.listen(port,()=>
 {
