@@ -1,6 +1,11 @@
 import { useChatStore } from "../store/useChatStore";
 
 import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
+import ProfileHeader from "../components/ProfileHeader";
+import ActiveTabSwitch from "../components/ActiveTabSwitch";
+import ChatsList from "../components/ChatsList";
+import ContactList from "../components/ContactList";
+
 
 function ChatPage() {
   const { activeTab } = useChatStore();
