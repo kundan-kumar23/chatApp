@@ -26,8 +26,6 @@ function ProfileHeader() {
     };
   };
 
-
-
   return (
     <div className="p-6 border-b border-slate-700/50">
       <div className="flex items-center justify-between">
@@ -38,9 +36,8 @@ function ProfileHeader() {
               className="size-14 rounded-full overflow-hidden relative group"
               onClick={() => fileInputRef.current.click()}
             >
-              
               <img
-                src={selectedImg || authUser.profilepic || "/avatar.png"}
+                src={selectedImg || authUser.profilePic || "/avatar.png"}
                 alt="User image"
                 className="size-full object-cover"
               />
@@ -84,7 +81,9 @@ function ProfileHeader() {
             onClick={() => {
               // play click sound before toggling
               mouseClickSound.currentTime = 0; // reset to start
-              mouseClickSound.play().catch((error) => console.log("Audio play failed:", error));
+              mouseClickSound
+                .play()
+                .catch((error) => console.log("Audio play failed:", error));
               toggleSound();
             }}
           >
