@@ -9,12 +9,15 @@ import cors from "cors"
 dotenv.config()
 
 const port = process.env.PORT || 3000;
+// for deployment
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.json({ limit: "5mb" }))
 app.use(cookieParser())
 app.use(cors(
     {
-      origin :"http://localhost:5173" ,
+      origin : process.env.CLIENT_URL || "http://localhost:5173" ,
       credentials : true  
     }
 ))
@@ -22,6 +25,19 @@ app.use(cors(
 app.use("/api/auth",authRoutes)
 app.use("/api/messages",messageRoutes)
 
+// for deployment
+const frontendPath = path.join(__dirname, "../../frontend/dist");
+
+app.use(express.static(frontendPath));
+
+
+app.get("*", (req, res) => {
+  if (req.path.startsWith("/api")) {
+    return res.status(404).json({ message: "API route not found" });
+  }
+
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
 
 server.listen(port,()=>
 {

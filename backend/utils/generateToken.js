@@ -7,9 +7,9 @@ export const generatetoken = async(newUser,res)=>
     },process.env.secret_code,{
         expiresIn : "7h"
     });
-    res.cookie("token",token,{
-        maxAge : 24 * 60 * 60 * 1000,
-        httpOnly: true,
-        secure: false
-    })
+  res.cookie("token", token, {
+  maxAge: 24 * 60 * 60 * 1000,
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+});
 }
